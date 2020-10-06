@@ -3,6 +3,7 @@ package com.example.pruebagopass.network
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.create
 
 object ServiceBuilder {
@@ -10,7 +11,7 @@ object ServiceBuilder {
 
     private val retrofit = Retrofit.Builder()
         .baseUrl("https://apiprueba.gopass.com.co/")
-        .addConverterFactory(GsonConverterFactory.create())
+        .addConverterFactory(ScalarsConverterFactory.create())
         .client(client)
         .build()
 
