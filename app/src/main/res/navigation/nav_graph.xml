@@ -3,9 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/establishmentsFragment">
+    app:startDestination="@id/registerFragment">
     <fragment
         android:id="@+id/establishmentsFragment"
         android:name="com.example.pruebagopass.establishments.EstablishmentsFragment"
-        android:label="EstablishmentsFragment" />
+        android:label="EstablishmentsFragment" >
+        <action
+            android:id="@+id/action_establishmentsFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.example.pruebagopass.register.RegisterFragment"
+        android:label="RegisterFragment" >
+        <action
+            android:id="@+id/action_registerFragment_to_establishmentsFragment"
+            app:destination="@id/establishmentsFragment" />
+    </fragment>
 </navigation>

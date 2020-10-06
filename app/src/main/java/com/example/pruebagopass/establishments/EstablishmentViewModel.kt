@@ -29,19 +29,6 @@ class EstablishmentViewModel: ViewModel() {
 
     init {
         getAllEstablishmentsData()
-        addUser()
-    }
-
-    private fun addUser() {
-        coroutineScope.launch {
-            val addUserDeferred = RestApi.RestApiService.retrofitService.addUserAsync("1", 48762, "asd", "qwe", "123", "asdasfd132sada", "adasdas")
-            try {
-                val result = addUserDeferred.await()
-                Log.d("AAAAA",  "$result")
-            } catch (e: Exception) {
-                Log.d("BBBBB",  "${e.message}")
-            }
-        }
     }
 
     private fun getAllEstablishmentsData() {
