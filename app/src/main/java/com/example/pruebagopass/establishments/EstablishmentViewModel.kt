@@ -3,6 +3,7 @@ package com.example.pruebagopass.establishments
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.pruebagopass.models.EstablishmentInfo
 import com.example.pruebagopass.models.ResponseObject
 import com.example.pruebagopass.network.RestApi
 import kotlinx.android.synthetic.main.activity_main.*
@@ -20,10 +21,15 @@ class EstablishmentViewModel: ViewModel() {
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
-    private val _response = MutableLiveData<String>()
+    private val _status = MutableLiveData<String>()
 
-    val response: LiveData<String>
-        get() = _response
+    val status: LiveData<String>
+        get() = _status
+
+    private val _establishments = MutableLiveData<List<EstablishmentInfo>>()
+
+    val establishments: LiveData<List<EstablishmentInfo>>
+        get() = _establishments
 
     init {
         getAllEstablishmentsData()
@@ -56,12 +62,13 @@ class EstablishmentViewModel: ViewModel() {
 
     private fun getAllEstablishmentsData() {
         coroutineScope.launch {
-            var getEstablishmentsDeferred = RestApi.RestApiService.retrofitService.getAllEstablishmentData()
+            val getEstablishmentsDeferred = RestApi.RestApiService.retrofitService.getAllEstablishmentData()
             try {
-                var listResult = getEstablishmentsDeferred.await()
-                _response.value = "Success: ${listResult.data.size} establishments retrieved"
+                val listResult = getEstablishmentsDeferred.await()
+                _status.value = "Success: ${listResult.data.size}"
+                _establishments.value = listResult.data
             } catch (e: Exception) {
-                _response.value = "Failure: ${e.message}"
+                _status.value = "Failure: ${e.message}"
             }
         }
     }

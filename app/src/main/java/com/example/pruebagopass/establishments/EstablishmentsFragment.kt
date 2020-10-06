@@ -25,6 +25,8 @@ class EstablishmentsFragment: Fragment() {
 
         binding.viewModel = viewModel
 
+        binding.photosGrid.adapter = GridAdapter()
+
         return binding.root
     }
 }
