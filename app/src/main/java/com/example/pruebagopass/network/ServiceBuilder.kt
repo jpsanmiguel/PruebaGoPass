@@ -1,5 +1,6 @@
 package com.example.pruebagopass.network
 
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
@@ -20,6 +21,7 @@ object ServiceBuilder {
         .baseUrl("https://apiprueba.gopass.com.co/")
         .addConverterFactory(MoshiConverterFactory.create(moshi))
 //        .addConverterFactory(ScalarsConverterFactory.create())
+        .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .client(client)
         .build()
 

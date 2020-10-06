@@ -6,11 +6,19 @@ import androidx.lifecycle.ViewModel
 import com.example.pruebagopass.models.ResponseObject
 import com.example.pruebagopass.network.RestApi
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.lang.Exception
 
 class EstablishmentViewModel: ViewModel() {
+
+    private var viewModelJob = Job()
+    private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
     private val _response = MutableLiveData<String>()
 
@@ -46,16 +54,20 @@ class EstablishmentViewModel: ViewModel() {
 //        })
 //    }
 
-    fun getAllEstablishmentsData() {
-        RestApi.RestApiService.retrofitService.getAllEstablishmentData().enqueue( object:
-            Callback<ResponseObject> {
-            override fun onFailure(call: Call<ResponseObject>, t: Throwable) {
-                _response.value = "Failure: " + t.message
+    private fun getAllEstablishmentsData() {
+        coroutineScope.launch {
+            var getEstablishmentsDeferred = RestApi.RestApiService.retrofitService.getAllEstablishmentData()
+            try {
+                var listResult = getEstablishmentsDeferred.await()
+                _response.value = "Success: ${listResult.data.size} establishments retrieved"
+            } catch (e: Exception) {
+                _response.value = "Failure: ${e.message}"
             }
+        }
+    }
 
-            override fun onResponse(call: Call<ResponseObject>, response: Response<ResponseObject>) {
-                _response.value = "${response.body()!!.data}"
-            }
-        })
+    override fun onCleared() {
+        super.onCleared()
+        viewModelJob.cancel()
     }
 }
