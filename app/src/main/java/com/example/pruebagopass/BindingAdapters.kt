@@ -1,6 +1,9 @@
 package com.example.pruebagopass
 
+import android.opengl.Visibility
+import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -17,14 +20,28 @@ fun bindRecyclerView(recyclerView: RecyclerView, data: List<EstablishmentInfo>?)
 
 @BindingAdapter("imageUrl")
 fun bindImage(imgView: ImageView, imgUrl: String?) {
-    imgUrl?.let {
-        val imgUri = imgUrl.toUri().buildUpon().scheme("https").build()
+    if(imgUrl.isNullOrEmpty()){
         Glide.with(imgView.context)
-            .load(imgUri)
-            .apply(
-                RequestOptions()
-                .placeholder(R.drawable.loading_animation)
-                .error(R.drawable.ic_broken_image))
+            .load(R.drawable.ic_broken_image)
             .into(imgView)
+    } else {
+        imgUrl?.let {
+            val imgUri = imgUrl.toUri().buildUpon().scheme("https").build()
+            Glide.with(imgView.context)
+                .load(imgUri)
+                .apply(
+                    RequestOptions()
+                        .placeholder(R.drawable.loading_animation)
+                        .error(R.drawable.ic_broken_image)
+                )
+                .into(imgView)
+        }
+    }
+}
+
+@BindingAdapter("showText")
+fun showText(textView: TextView, text: String?) {
+    if(text.isNullOrBlank() || text.isEmpty()) {
+        textView.visibility = View.GONE
     }
 }

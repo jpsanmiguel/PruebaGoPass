@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">PruebaGoPass</string>
+    <string name="direccion">Dirección: %1$s</string>
+    <string name="horario">Horario: %1$s</string>
+    <string name="tarifaVehiculo">Tarifa vehículo: \$ %1$s</string>
+    <string name="tarifaMoto">Tarifa moto: \$ %1$s</string>
 </resources>

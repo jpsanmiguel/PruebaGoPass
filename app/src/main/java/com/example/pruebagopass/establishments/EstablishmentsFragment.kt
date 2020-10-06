@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.pruebagopass.databinding.FragmentEstablishmentBinding
+
 
 class EstablishmentsFragment: Fragment() {
 
@@ -26,6 +28,8 @@ class EstablishmentsFragment: Fragment() {
         binding.viewModel = viewModel
 
         binding.photosGrid.adapter = GridAdapter()
+        binding.photosGrid.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+
 
         return binding.root
     }

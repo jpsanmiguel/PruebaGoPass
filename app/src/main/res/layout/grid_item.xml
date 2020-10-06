@@ -3,18 +3,121 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
             name="establishment"
             type="com.example.pruebagopass.models.EstablishmentInfo" />
     </data>
-    <ImageView
-        android:id="@+id/establishment_image"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="170dp"
-        android:scaleType="centerCrop"
-        android:adjustViewBounds="true"
-        android:padding="2dp"
-        app:imageUrl="@{establishment.imageurl}"
-        tools:src="@tools:sample/backgrounds/scenic"/>
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/establishment_image"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:adjustViewBounds="true"
+            android:background="@drawable/ic_border"
+            android:padding="2dp"
+            android:scaleType="centerCrop"
+            app:imageUrl="@{establishment.imageurl}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/backgrounds/scenic" />
+
+        <ImageView
+            android:id="@+id/imageButton"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/establishment_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/name"
+            app:srcCompat="@drawable/grey_background" />
+
+        <TextView
+            android:id="@+id/name"
+            showText="@{establishment.nombre}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:includeFontPadding="false"
+            android:paddingStart="6dp"
+            android:paddingTop="4dp"
+            android:paddingEnd="0dp"
+            android:text="@{establishment.nombre}"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toTopOf="@+id/address"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/establishment_image"
+            tools:text="Text" />
+
+        <TextView
+            android:id="@+id/address"
+            showText="@{establishment.direccion}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:includeFontPadding="false"
+            android:paddingStart="6dp"
+            android:paddingEnd="0dp"
+            android:textSize="14sp"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toTopOf="@+id/schedule"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/establishment_image"
+            tools:text="Text" />
+
+        <TextView
+            android:id="@+id/schedule"
+            showText="@{establishment.horario}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:includeFontPadding="false"
+            android:paddingStart="6dp"
+            android:paddingEnd="0dp"
+            android:textSize="14sp"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toTopOf="@+id/carFee"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/establishment_image"
+            tools:text="Text" />
+
+        <TextView
+            android:id="@+id/carFee"
+            showText="@{establishment.tarifaVehiculo}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:includeFontPadding="false"
+            android:paddingStart="6dp"
+            android:paddingEnd="0dp"
+            android:textSize="14sp"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toTopOf="@+id/bikeFee"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/establishment_image"
+            tools:text="Text" />
+
+        <TextView
+            android:id="@+id/bikeFee"
+            showText="@{establishment.tarifaMoto}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:includeFontPadding="false"
+            android:paddingStart="6dp"
+            android:paddingBottom="4dp"
+            android:paddingEnd="0dp"
+            android:textSize="14sp"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="@+id/establishment_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/establishment_image"
+            tools:text="Text" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
