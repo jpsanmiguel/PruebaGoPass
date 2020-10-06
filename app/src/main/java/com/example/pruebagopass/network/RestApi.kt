@@ -1,6 +1,8 @@
 package com.example.pruebagopass.network
 
-import com.example.pruebagopass.UserInfo
+import com.example.pruebagopass.models.EstablishmentInfo
+import com.example.pruebagopass.models.ResponseObject
+import com.example.pruebagopass.models.UserInfo
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -11,8 +13,15 @@ interface RestApi {
     @POST("client/registre/")
     fun addUser(@Body userInfo: UserInfo): Call<UserInfo>
 
+
     @GET("establishment/getAllEstablishment")
-    fun getAllEstablishment(): Call<String>
+    fun getAllEstablishmentString(): Call<String>
+
+    @GET("establishment/getAllEstablishment")
+    fun getAllEstablishmentData(): Call<ResponseObject>
+
+    @GET("establishment/getAllEstablishment")
+    fun getAllEstablishment(): Call<List<EstablishmentInfo>>
 
     object RestApiService {
         val retrofitService: RestApi by lazy { ServiceBuilder.buildService(RestApi::class.java) }
